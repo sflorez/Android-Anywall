@@ -4,17 +4,6 @@ A fun geolocation app built with Parse.
 
 See more details here: https://www.parse.com/anywall
 
-## iOS
-
-### Xcode Project Setup
-
-1. Clone the repository and open the `Anywall.xcodeproj` project found in the `AnyWall-iOS` folder.
-2. Add your Parse application id and client key in `PAWAppDelegate.m`
-
-### Learn More
-
-To learn more, take a look at the [AnyWall iOS](https://parse.com/tutorials/anywall) tutorial. 
-
 ## Android
 
 ### Android Project Setup
