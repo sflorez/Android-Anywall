@@ -67,13 +67,9 @@ public class LoginActivity extends Activity {
   private void forgotPassword() {
     // Start an intent for the dispatch activity
     Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
 
-    try {
-        startActivity(intent);
-    } catch (ActivityNotFoundException e) {
-        Log.i("HEY YOU", "Activity not found. You care about this one.");
-    }
   }
 
   private void login() {
