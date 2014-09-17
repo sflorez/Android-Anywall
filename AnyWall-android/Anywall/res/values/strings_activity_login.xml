@@ -18,6 +18,7 @@
     <string name="error_username_not_found">Username not found!</string>
     <string name="error_email_not_found">Email not found</string>
     <string name="error_mismatched_passwords">enter the same password twice</string>
+    <string name="error_matched_security_questions">choose different security questions</string>
     <string name="error_security_questions_not_found">Security questions not found</string>
     <string name="error_join">", and "</string>
     <string name="error_end">.</string>

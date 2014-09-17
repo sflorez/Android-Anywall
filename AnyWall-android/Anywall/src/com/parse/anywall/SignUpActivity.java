@@ -93,6 +93,8 @@ public class SignUpActivity extends Activity {
     String email = emailEditText.getText().toString().trim();
     String password = passwordEditText.getText().toString().trim();
     String passwordAgain = passwordAgainEditText.getText().toString().trim();
+    int securityQuestionChoice1 = securityQuestion1.getSelectedItemPosition();
+    int securityQuestionChoice2 = securityQuestion2.getSelectedItemPosition();
     String securityAnswer1 = securityAnswerEditText1.getText().toString().trim();
     String securityAnswer2 = securityAnswerEditText2.getText().toString().trim();
 
@@ -124,6 +126,13 @@ public class SignUpActivity extends Activity {
       validationError = true;
       validationErrorMessage.append(getString(R.string.error_mismatched_passwords));
     }
+    if (securityQuestionChoice1 == securityQuestionChoice2) {
+      if (validationError) {
+        validationErrorMessage.append(getString(R.string.error_join));
+      }
+      validationError = true;
+      validationErrorMessage.append(getString(R.string.error_matched_security_questions));
+    }
     if (securityAnswer1.length() == 0 || securityAnswer2.length() == 0) {
       if (validationError) {
         validationErrorMessage.append(getString(R.string.error_join));
@@ -151,11 +160,10 @@ public class SignUpActivity extends Activity {
     user.setUsername(username);
     user.setEmail(email);
     user.setPassword(password);
+    user.put("securityQuestion1", securityQuestionChoice1);
+    user.put("securityQuestion2", securityQuestionChoice2);
     user.put("securityAnswer1", securityAnswer1);
     user.put("securityAnswer2", securityAnswer2);
-
-
-
 
     // Call the Parse signup method
     user.signUpInBackground(new SignUpCallback() {
