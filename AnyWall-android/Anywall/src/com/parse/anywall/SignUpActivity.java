@@ -21,6 +21,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,9 +60,9 @@ public class SignUpActivity extends Activity {
     });
     ParseQuery<ParseObject> query = ParseQuery.getQuery("SecurityQuestions");
     query.findInBackground(new FindCallback<ParseObject>() {
-      public void done(List<ParseObject> objects, ParseException e) {
+      public void done(List<ParseObject> questions, ParseException e) {
         if (e == null) {
-          questionsWereRetrievedSuccessfully(objects);
+          questionsWereRetrievedSuccessfully(questions);
         } else {
           questionsRetrievalFailed();
         }
@@ -90,8 +92,8 @@ public class SignUpActivity extends Activity {
       validationErrorMessage.append(getString(R.string.error_blank_username));
     }
     if (email.length() == 0) {
-        validationError = true;
-        validationErrorMessage.append(getString(R.string.error_blank_email));
+      validationError = true;
+      validationErrorMessage.append(getString(R.string.error_blank_email));
     }
     if (password.length() == 0) {
       if (validationError) {
@@ -144,21 +146,29 @@ public class SignUpActivity extends Activity {
       }
     });
   }
-  private void questionsWereRetrievedSuccessfully(List<ParseObject> objects) {
 
+  private void questionsWereRetrievedSuccessfully(List<ParseObject> questionObjects) {
+    // Extract Strings from security questions
+    List<String> questions = new ArrayList<String>();
+    for (ParseObject q : questionObjects) {
+      questions.add(q.get("question").toString());
+    }
+
+    // Populate spinners
     Spinner spinner1 = (Spinner) findViewById(R.id.security_question1_spinner);
     Spinner spinner2 = (Spinner) findViewById(R.id.security_question2_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-        R.array.questions_array, android.R.layout.simple_spinner_item);
+// Create an ArrayAdapter using the questions ArrayList and a default spinner layout
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SignUpActivity.this,
+        R.layout.multiline_spinner_item, questions);
 // Specify the layout to use when the list of choices appears
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+// Apply the adapter to the spinners
     spinner1.setAdapter(adapter);
     spinner2.setAdapter(adapter);
   }
+
   private void questionsRetrievalFailed() {
-    //todo
+    Toast.makeText(SignUpActivity.this, R.string.error_security_questions_not_found, Toast.LENGTH_LONG).show();
   }
 }
 

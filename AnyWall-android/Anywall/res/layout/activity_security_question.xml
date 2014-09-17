@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SecurityQuestionActivity">
 
-    <!-- Forgot Username form -->
+    <!-- Security Question form -->
 
     <ScrollView
-        android:id="@+id/forgot_password_form"
+        android:id="@+id/security_question_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

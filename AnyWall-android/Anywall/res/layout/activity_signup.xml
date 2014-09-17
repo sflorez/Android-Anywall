@@ -1,17 +1,17 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SignUpActivity" >
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:context=".SignUpActivity">
 
     <!-- Login form -->
 
     <ScrollView
         android:id="@+id/signup_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             style="@style/LoginFormContainer"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/username_edit_text"
@@ -20,7 +20,7 @@
                 android:hint="@string/prompt_username"
                 android:inputType="text"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <EditText
                 android:id="@+id/email_edit_text"
@@ -29,7 +29,7 @@
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <EditText
                 android:id="@+id/password_edit_text"
@@ -38,8 +38,8 @@
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true" />
-            
+                android:singleLine="true"/>
+
             <EditText
                 android:id="@+id/password_again_edit_text"
                 android:layout_width="match_parent"
@@ -50,11 +50,13 @@
                 android:singleLine="true"
                 android:imeActionId="@+id/edittext_action_signup"
                 android:imeActionLabel="@string/signup"
-                android:imeOptions="actionUnspecified" />
+                android:imeOptions="actionUnspecified"/>
+
             <Spinner
                 android:id="@+id/security_question1_spinner"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:singleLine="false"/>
 
             <EditText
                 android:id="@+id/security_answer1"
@@ -63,11 +65,13 @@
                 android:hint="@string/prompt_security_answer"
                 android:inputType="text"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
+
             <Spinner
                 android:id="@+id/security_question2_spinner"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:singleLine="false"/>
 
             <EditText
                 android:id="@+id/security_answer2"
@@ -76,7 +80,7 @@
                 android:hint="@string/prompt_security_answer"
                 android:inputType="text"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <Button
                 android:id="@+id/action_button"
@@ -86,7 +90,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/signup" />
+                android:text="@string/signup"/>
         </LinearLayout>
     </ScrollView>
 
