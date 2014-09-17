@@ -49,7 +49,7 @@ public class ForgotPasswordActivity extends Activity {
       }
 
       ParseUser.requestPasswordResetInBackground(forgetfulEmail,
-      new RequestPasswordResetCallback() {
+          new RequestPasswordResetCallback() {
           public void done(ParseException e) {
         if (e == null) {
                     requestedSuccessfully();

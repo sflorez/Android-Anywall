@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array
+        name="questions_array">
+        <item>Who was your choldhoid hero?</item>
+        <item>Where were you when you had your first alochclioc drink (or cigarette)?</item>
+        <item>What was the name of the boy/girl you had your socend kiss with?</item>
+        <item>What was the last name of your thrid grade teacher?</item>
+    </array>
+</resources>

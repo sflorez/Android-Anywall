@@ -81,6 +81,12 @@
         <activity
             android:name=".ForgotPasswordActivity"
             android:label="@string/forgot_password_activity" />
+        <activity
+            android:name=".ForgotUsernameActivity"
+            android:label="@string/forgot_username_activity" />
+        <activity
+            android:name=".SecurityQuestionActivity"
+            android:label="@string/security_question_activity" />
     </application>
 
 </manifest>

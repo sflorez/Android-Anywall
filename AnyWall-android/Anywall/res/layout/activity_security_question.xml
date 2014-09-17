@@ -1,8 +1,8 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ForgotPasswordActivity">
+    tools:context=".SecurityQuestionActivity">
 
-    <!-- Password Forgot form -->
+    <!-- Forgot Username form -->
 
     <ScrollView
         android:id="@+id/forgot_password_form"
@@ -12,15 +12,33 @@
         <LinearLayout
             style="@style/LoginFormContainer"
             android:orientation="vertical">
+            <Spinner
+                android:id="@+id/security_question1_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/forgetful_username"
+                android:id="@+id/security_answer1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_username"
+                android:hint="@string/prompt_security_answer"
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true" />
+            <Spinner
+                android:id="@+id/security_question2_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/security_answer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_security_answer"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
 
             <Button
                 android:id="@+id/action_button"

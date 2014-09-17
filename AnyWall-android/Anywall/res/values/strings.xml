@@ -23,4 +23,12 @@
     <!-- ForgotPasswordActivity -->
     <string name="forgot_password_activity">Reset Your Password</string>
 
+    <!--ForgotUsernameActivity -->
+    <string name="forgot_username_activity">Forgot Username</string>
+
+    <!--SecurityQuestionActivity -->
+    <string name="security_question_activity">Security Question</string>
+    <string name="prompt_security_answer">Enter Your Answer</string>
+
+
 </resources>

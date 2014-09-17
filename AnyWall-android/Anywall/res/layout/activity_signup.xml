@@ -51,6 +51,32 @@
                 android:imeActionId="@+id/edittext_action_signup"
                 android:imeActionLabel="@string/signup"
                 android:imeOptions="actionUnspecified" />
+            <Spinner
+                android:id="@+id/security_question1_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/security_answer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_security_answer"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+            <Spinner
+                android:id="@+id/security_question2_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/security_answer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_security_answer"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
 
             <Button
                 android:id="@+id/action_button"

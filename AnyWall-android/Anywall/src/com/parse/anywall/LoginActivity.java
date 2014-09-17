@@ -2,10 +2,8 @@ package com.parse.anywall;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -62,11 +60,27 @@ public class LoginActivity extends Activity {
               forgotPassword();
           }
       });
+
+    // Set up the forgot username button click handler
+    Button forgotUsernameButton = (Button) findViewById(R.id.forgot_username_button);
+    forgotUsernameButton.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View view) {
+        forgotUsername();
+      }
+    });
   }
 
   private void forgotPassword() {
     // Start an intent for the dispatch activity
     Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+
+  }
+
+  private void forgotUsername() {
+    // Start an intent for the dispatch activity
+    Intent intent = new Intent(LoginActivity.this, ForgotUsernameActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
 
