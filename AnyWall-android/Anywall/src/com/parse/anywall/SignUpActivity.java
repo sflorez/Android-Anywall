@@ -22,7 +22,6 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,6 +33,10 @@ public class SignUpActivity extends Activity {
   private EditText emailEditText;
   private EditText passwordEditText;
   private EditText passwordAgainEditText;
+  private Spinner securityQuestion1;
+  private Spinner securityQuestion2;
+  private EditText securityAnswerEditText1;
+  private EditText securityAnswerEditText2;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,13 @@ public class SignUpActivity extends Activity {
 
     passwordEditText = (EditText) findViewById(R.id.password_edit_text);
     passwordAgainEditText = (EditText) findViewById(R.id.password_again_edit_text);
+
+    securityQuestion1 = (Spinner) findViewById(R.id.security_question1_spinner);
+    securityQuestion2 = (Spinner) findViewById(R.id.security_question2_spinner);
+
+    securityAnswerEditText1 = (EditText) findViewById(R.id.security_answer1_edit_text);
+    securityAnswerEditText2 = (EditText) findViewById(R.id.security_answer2_edit_text);
+
     passwordAgainEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -83,6 +93,8 @@ public class SignUpActivity extends Activity {
     String email = emailEditText.getText().toString().trim();
     String password = passwordEditText.getText().toString().trim();
     String passwordAgain = passwordAgainEditText.getText().toString().trim();
+    String securityAnswer1 = securityAnswerEditText1.getText().toString().trim();
+    String securityAnswer2 = securityAnswerEditText2.getText().toString().trim();
 
     // Validate the sign up data
     boolean validationError = false;
@@ -92,6 +104,9 @@ public class SignUpActivity extends Activity {
       validationErrorMessage.append(getString(R.string.error_blank_username));
     }
     if (email.length() == 0) {
+      if (validationError) {
+        validationErrorMessage.append(getString(R.string.error_join));
+      }
       validationError = true;
       validationErrorMessage.append(getString(R.string.error_blank_email));
     }
@@ -109,6 +124,14 @@ public class SignUpActivity extends Activity {
       validationError = true;
       validationErrorMessage.append(getString(R.string.error_mismatched_passwords));
     }
+    if (securityAnswer1.length() == 0 || securityAnswer2.length() == 0) {
+      if (validationError) {
+        validationErrorMessage.append(getString(R.string.error_join));
+      }
+      validationError = true;
+      validationErrorMessage.append(getString(R.string.error_blank_security_answer));
+    }
+
     validationErrorMessage.append(getString(R.string.error_end));
 
     // If there is a validation error, display the error
@@ -128,6 +151,11 @@ public class SignUpActivity extends Activity {
     user.setUsername(username);
     user.setEmail(email);
     user.setPassword(password);
+    user.put("securityAnswer1", securityAnswer1);
+    user.put("securityAnswer2", securityAnswer2);
+
+
+
 
     // Call the Parse signup method
     user.signUpInBackground(new SignUpCallback() {
@@ -155,16 +183,19 @@ public class SignUpActivity extends Activity {
     }
 
     // Populate spinners
-    Spinner spinner1 = (Spinner) findViewById(R.id.security_question1_spinner);
-    Spinner spinner2 = (Spinner) findViewById(R.id.security_question2_spinner);
-// Create an ArrayAdapter using the questions ArrayList and a default spinner layout
+    securityQuestion1 = (Spinner) findViewById(R.id.security_question1_spinner);
+    securityQuestion2 = (Spinner) findViewById(R.id.security_question2_spinner);
+
+    // Create an ArrayAdapter using the questions ArrayList and a default spinner layout
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(SignUpActivity.this,
         R.layout.multiline_spinner_item, questions);
-// Specify the layout to use when the list of choices appears
+
+    // Specify the layout to use when the list of choices appears
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinners
-    spinner1.setAdapter(adapter);
-    spinner2.setAdapter(adapter);
+
+    // Apply the adapter to the spinners
+    securityQuestion1.setAdapter(adapter);
+    securityQuestion2.setAdapter(adapter);
   }
 
   private void questionsRetrievalFailed() {

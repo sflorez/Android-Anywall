@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/security_answer1"
+                android:id="@+id/security_answer1_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_security_answer"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/security_answer2"
+                android:id="@+id/security_answer2_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_security_answer"
