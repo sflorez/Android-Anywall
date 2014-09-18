@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -21,14 +22,13 @@ import java.util.List;
 
 
 public class SecurityQuestionActivity extends Activity {
+  int securityQuestionChoice1, securityQuestionChoice2;
+  private String securityQuestion1, securityQuestion2, securityAnswer1, securityAnswer2;
+  private EditText securityAnswer1EditText, securityAnswer2EditText;
+
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_security_question);
-
-
-
-
-
 
     // Set up the submit button click handler
     Button actionButton = (Button) findViewById(R.id.action_button);
@@ -37,24 +37,81 @@ public class SecurityQuestionActivity extends Activity {
         checkSecurityAnswers();
       }
     });
+
+    //set up the edit texts with the appropriate fields
+    securityAnswer1EditText = (EditText)findViewById(R.id.security_answer1_edit_text);
+    securityAnswer2EditText = (EditText)findViewById(R.id.security_answer2_edit_text);
+
+    Bundle extras = getIntent().getExtras();
+    ParseQuery<ParseUser> forgetfulUsers;
+    ParseUser forgetfulUser = null;
+
+    forgetfulUsers = ParseUser.getQuery().whereEqualTo("email", extras.getString("EXTRA_USER_EMAIL"));
+    try {
+      forgetfulUser = forgetfulUsers.getFirst();
+    } catch (ParseException e) {
+      Log.i("PU", e.toString()); // Bugs stink, pe yu,
+    }
+
+    securityQuestionChoice1 = forgetfulUser.getInt("securityQuestion1");
+    securityQuestionChoice2 = forgetfulUser.getInt("securityQuestion2");
+    securityAnswer1 = forgetfulUser.getString("securityAnswer1");
+    securityAnswer2 = forgetfulUser.getString("securityAnswer2");
+
+    // Get security question choices to match them to actual security questions
+    ParseQuery<ParseObject> query = ParseQuery.getQuery("SecurityQuestions");
+    query.findInBackground(new FindCallback<ParseObject>() {
+      public void done(List<ParseObject> questions, ParseException e) {
+        if (e == null) {
+          // Match security question choices to actual choices. Store them
+          questionsWereRetrievedSuccessfully(questions);
+        } else {
+          // Somethind d3rps
+          questionsRetrievalFailed();
+        }
+      }
+    });
+
+
+
+  }
+
+  private void questionsRetrievalFailed() {
+    Toast.makeText(SecurityQuestionActivity.this, R.string.error_security_questions_not_found, Toast.LENGTH_LONG).show();
+  }
+
+  private void questionsWereRetrievedSuccessfully(List<ParseObject> questions) {
+    TextView securityQuestion1TextView, securityQuestion2TextView;
+
+    securityQuestion1 = questions.get(securityQuestionChoice1).get("question").toString();
+    securityQuestion2 = questions.get(securityQuestionChoice2).get("question").toString();
+
+    securityQuestion1TextView = (TextView) findViewById(R.id.security_question1_text_view);
+    securityQuestion2TextView = (TextView) findViewById(R.id.security_question2_text_view);
+
+    securityQuestion1TextView.setText(securityQuestion1);
+    securityQuestion2TextView.setText(securityQuestion2);
   }
 
   private void objectsWereRetrievedSuccessfully(List<ParseObject> objects) {
 
-    Spinner spinner1 = (Spinner) findViewById(R.id.security_question1_spinner);
-    Spinner spinner2 = (Spinner) findViewById(R.id.security_question2_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-        R.array.questions_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-    spinner1.setAdapter(adapter);
-    spinner2.setAdapter(adapter);
   }
 
   private void checkSecurityAnswers() {
+    // todo do not call too early. Only call at end. Actually don't even call this, this is linked to a clickListener.
+    String answer1, answer2;
 
+    answer1 = securityAnswer1EditText.getText().toString().trim();
+    answer2 = securityAnswer2EditText.getText().toString().trim();
+
+    if (answer1.equals(securityAnswer1) && answer2.equals(securityAnswer2)) {
+      Log.i("HEY YOU", "It worked");
+      Bundle extras = getIntent().getExtras();
+      Intent intent = new Intent(SecurityQuestionActivity.this, ResetUsernameActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+      intent.putExtra("EXTRA_USER_EMAIL", extras.getString("EXTRA_USER_EMAIL"));
+      startActivity(intent);
+    }
   }
 
   private void requestedSuccessfully() {

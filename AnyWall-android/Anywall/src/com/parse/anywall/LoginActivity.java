@@ -61,9 +61,9 @@ public class LoginActivity extends Activity {
           }
       });
 
-    // Set up the forgot username button click handler
-    Button forgotUsernameButton = (Button) findViewById(R.id.forgot_username_button);
-    forgotUsernameButton.setOnClickListener(new View.OnClickListener() {
+      // Set up the forgot username button click handler
+      Button forgotUsernameButton = (Button) findViewById(R.id.forgot_username_button);
+      forgotUsernameButton.setOnClickListener(new View.OnClickListener() {
       public void onClick(View view) {
         forgotUsername();
       }
@@ -83,7 +83,6 @@ public class LoginActivity extends Activity {
     Intent intent = new Intent(LoginActivity.this, ForgotUsernameActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
-
   }
 
   private void login() {

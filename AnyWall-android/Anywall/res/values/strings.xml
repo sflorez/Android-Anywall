@@ -26,6 +26,9 @@
     <!--ForgotUsernameActivity -->
     <string name="forgot_username_activity">Forgot Username</string>
 
+    <!--ResetUsernameActivity -->
+    <string name="reset_username_activity">Reset Username</string>
+
     <!--SecurityQuestionActivity -->
     <string name="security_question_activity">Security Question</string>
     <string name="prompt_security_answer">Enter Your Answer</string>

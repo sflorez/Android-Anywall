@@ -39,26 +39,21 @@ public class ForgotUsernameActivity extends Activity {
 
     forgetfulUser = ParseUser.getQuery().whereEqualTo("email", forgetfulEmail);
 
-//exits out of try before requestedSuccessfully() is called
+    // Exits out of try before requestedSuccessfully() is called
     try {
       forgetfulEmail = forgetfulUser.getFirst().getEmail();
-      requestedSuccessfully();
+      requestedSuccessfully(forgetfulEmail);
     } catch (ParseException e) {
       Toast.makeText(ForgotUsernameActivity.this, R.string.error_email_not_found, Toast.LENGTH_LONG).show();
       Log.i("HEY", e.toString());
       requestDidNotSucceed();
     }
-
-
-
-//todo implement username reminder through email
-
-
   }
-  private void requestedSuccessfully()
+  private void requestedSuccessfully(String forgetfulEmail)
   {
     Intent intent = new Intent(ForgotUsernameActivity.this, SecurityQuestionActivity.class);
-    intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.putExtra("EXTRA_USER_EMAIL", forgetfulEmail);
     startActivity(intent);
   }
 
