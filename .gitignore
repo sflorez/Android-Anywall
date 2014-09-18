@@ -3,14 +3,6 @@
 *.swp
 .arcconfig
 
-# Xcode
-*.mode1v3
-*.mode2v3
-*.pbxuser
-*.perspectivev3
-*.xcworkspace
-xcuserdata
-
 # Eclipse
 *.pydevproject
 .project
@@ -40,6 +32,9 @@ server.config
 # Java class files
 *.class
 
-
 # Local configuration file (sdk path, etc)
 local.properties
+
+# API Keys
+api_keys.xml
+
