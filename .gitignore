@@ -3,6 +3,9 @@
 *.swp
 .arcconfig
 
+# Android Studio
+.idea/
+
 # Eclipse
 *.pydevproject
 .project
