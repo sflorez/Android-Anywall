@@ -39,14 +39,14 @@ public class SecurityQuestionActivity extends Activity {
     });
 
     //set up the edit texts with the appropriate fields
-    securityAnswer1EditText = (EditText)findViewById(R.id.security_answer1_edit_text);
-    securityAnswer2EditText = (EditText)findViewById(R.id.security_answer2_edit_text);
+    securityAnswer1EditText = (EditText) findViewById(R.id.security_answer1_edit_text);
+    securityAnswer2EditText = (EditText) findViewById(R.id.security_answer2_edit_text);
 
     Bundle extras = getIntent().getExtras();
     ParseQuery<ParseUser> forgetfulUsers;
     ParseUser forgetfulUser = null;
 
-    forgetfulUsers = ParseUser.getQuery().whereEqualTo("email", extras.getString("EXTRA_USER_EMAIL"));
+    forgetfulUsers = ParseUser.getQuery().whereEqualTo("username", extras.getString("EXTRA_USER_USERNAME"));
     try {
       forgetfulUser = forgetfulUsers.getFirst();
     } catch (ParseException e) {
@@ -71,9 +71,6 @@ public class SecurityQuestionActivity extends Activity {
         }
       }
     });
-
-
-
   }
 
   private void questionsRetrievalFailed() {
@@ -93,10 +90,6 @@ public class SecurityQuestionActivity extends Activity {
     securityQuestion2TextView.setText(securityQuestion2);
   }
 
-  private void objectsWereRetrievedSuccessfully(List<ParseObject> objects) {
-
-  }
-
   private void checkSecurityAnswers() {
     // todo do not call too early. Only call at end. Actually don't even call this, this is linked to a clickListener.
     String answer1, answer2;
@@ -107,20 +100,10 @@ public class SecurityQuestionActivity extends Activity {
     if (answer1.equals(securityAnswer1) && answer2.equals(securityAnswer2)) {
       Log.i("HEY YOU", "It worked");
       Bundle extras = getIntent().getExtras();
-      Intent intent = new Intent(SecurityQuestionActivity.this, ResetUsernameActivity.class);
+      Intent intent = new Intent(SecurityQuestionActivity.this, LoginActivity.class);
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-      intent.putExtra("EXTRA_USER_EMAIL", extras.getString("EXTRA_USER_EMAIL"));
+      intent.putExtra("EXTRA_USER_USERNAME", extras.getString("EXTRA_USER_USERNAME"));
       startActivity(intent);
     }
-  }
-
-  private void requestedSuccessfully() {
-    Intent intent = new Intent(SecurityQuestionActivity.this, DispatchActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-  }
-
-  private void requestDidNotSucceed() {
-    Toast.makeText(SecurityQuestionActivity.this, R.string.error_email_not_found, Toast.LENGTH_LONG).show();
   }
 }

@@ -20,7 +20,10 @@
                 android:hint="@string/prompt_username"
                 android:inputType="text"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:imeActionId="@+id/edittext_action_submit"
+                android:imeActionLabel="@string/submit"
+                android:imeOptions="actionUnspecified" />
 
             <Button
                 android:id="@+id/action_button"

@@ -1,17 +1,17 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".LoginActivity" >
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:context=".LoginActivity">
 
     <!-- Login form -->
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             style="@style/LoginFormContainer"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/username"
@@ -20,10 +20,10 @@
                 android:hint="@string/prompt_username"
                 android:inputType="text"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
@@ -32,7 +32,7 @@
                 android:singleLine="true"
                 android:imeActionId="@+id/edittext_action_login"
                 android:imeActionLabel="@string/login"
-                android:imeOptions="actionUnspecified" />
+                android:imeOptions="actionUnspecified"/>
 
             <Button
                 android:id="@+id/action_button"
@@ -42,7 +42,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/login" />
+                android:text="@string/login"/>
 
             <Button
                 android:id="@+id/forgot_password_button"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/forgot_password" />
+                android:text="@string/forgot_password"/>
 
             <Button
                 android:id="@+id/forgot_username_button"
@@ -62,7 +62,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/forgot_username" />
+                android:text="@string/forgot_username"/>
         </LinearLayout>
     </ScrollView>
 

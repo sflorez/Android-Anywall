@@ -47,10 +47,7 @@
                 android:hint="@string/prompt_password_again"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:imeActionId="@+id/edittext_action_signup"
-                android:imeActionLabel="@string/signup"
-                android:imeOptions="actionUnspecified"/>
+                android:singleLine="true"/>
 
             <Spinner
                 android:id="@+id/security_question1_spinner"
@@ -80,7 +77,10 @@
                 android:hint="@string/prompt_security_answer"
                 android:inputType="text"
                 android:maxLines="1"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:imeActionId="@+id/edittext_action_signup"
+                android:imeActionLabel="@string/signup"
+                android:imeOptions="actionUnspecified"/>
 
             <Button
                 android:id="@+id/action_button"

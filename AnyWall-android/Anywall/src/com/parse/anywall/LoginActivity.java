@@ -1,8 +1,10 @@
 package com.parse.anywall;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,46 +26,64 @@ public class LoginActivity extends Activity {
   private EditText usernameEditText;
   private EditText passwordEditText;
 
+  @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_login);
 
+    String username = null;
+    Bundle extras = getIntent().getExtras();
+
     // Set up the login form.
     usernameEditText = (EditText) findViewById(R.id.username);
-    passwordEditText = (EditText) findViewById(R.id.password);
+    passwordEditText = (EditText) findViewById(R.id.password_edit_text);
     passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == R.id.edittext_action_login ||
-                    actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                login();
-                return true;
-            }
-            return false;
+      @Override
+      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == R.id.edittext_action_login ||
+            actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+          login();
+          return true;
         }
+        return false;
+      }
     });
 
-      // Set up the submit button click handler
-      Button actionButton = (Button) findViewById(R.id.action_button);
-      actionButton.setOnClickListener(new View.OnClickListener() {
-          public void onClick(View view) {
-              login();
-          }
-      });
+    // Check if we have a reasonable extras Bundle, because I guess sometimes it can be null... -.-
+    if (extras != null) {
+      // Check if we can prefill the username
+      if (extras.containsKey("EXTRA_USER_USERNAME") ) {
+        // We tried to set a key
 
-      // Set up the forgot password button click handler
-      Button forgotPasswordButton = (Button) findViewById(R.id.forgot_password_button);
-      forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
-          public void onClick(View view) {
-              forgotPassword();
-          }
-      });
+        username = extras.getString("EXTRA_USER_USERNAME", null);
+        if (username != null) {
+          // The extra value is not null. Prefill username
+          usernameEditText.setText(username);
+        }
+      }
+    }
 
-      // Set up the forgot username button click handler
-      Button forgotUsernameButton = (Button) findViewById(R.id.forgot_username_button);
-      forgotUsernameButton.setOnClickListener(new View.OnClickListener() {
+    // Set up the submit button click handler
+    Button actionButton = (Button) findViewById(R.id.action_button);
+    actionButton.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View view) {
+        login();
+      }
+    });
+
+    // Set up the forgot password button click handler
+    Button forgotPasswordButton = (Button) findViewById(R.id.forgot_password_button);
+    forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View view) {
+        forgotPassword();
+      }
+    });
+
+    // Set up the forgot username button click handler
+    Button forgotUsernameButton = (Button) findViewById(R.id.forgot_username_button);
+    forgotUsernameButton.setOnClickListener(new View.OnClickListener() {
       public void onClick(View view) {
         forgotUsername();
       }
