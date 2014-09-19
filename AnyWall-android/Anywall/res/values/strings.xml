@@ -32,4 +32,5 @@
     <!-- SecurityQuestionActivity -->
     <string name="security_question_activity">Security Question</string>
     <string name="prompt_security_answer">Enter Your Answer</string>
+    <string name="error_security_answers_incorrect">Security answers are incorrect</string>
 </resources>

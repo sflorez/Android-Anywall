@@ -57,7 +57,7 @@ public class SignUpActivity extends Activity {
     securityAnswerEditText1 = (EditText) findViewById(R.id.security_answer1_edit_text);
     securityAnswerEditText2 = (EditText) findViewById(R.id.security_answer2_edit_text);
 
-    passwordAgainEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    securityAnswerEditText2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == R.id.edittext_action_signup ||

@@ -23,9 +23,6 @@ public class ForgotUsernameActivity extends Activity {
     setContentView(R.layout.activity_forgot_username);
 
     EditText emailEditText = (EditText) findViewById(R.id.forgetful_email_edit_text);
-
-    // Set up the submit button click handler
-    Button actionButton = (Button) findViewById(R.id.action_button);
     emailEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -37,6 +34,9 @@ public class ForgotUsernameActivity extends Activity {
         return false;
       }
     });
+
+    // Set up the submit button click handler
+    Button actionButton = (Button) findViewById(R.id.action_button);
 
     actionButton.setOnClickListener(new View.OnClickListener() {
       public void onClick(View view) {
