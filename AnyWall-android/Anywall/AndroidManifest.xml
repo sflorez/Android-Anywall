@@ -90,6 +90,10 @@
         <activity
             android:name=".ResetUsernameActivity"
             android:label="@string/reset_username_activity" />
+
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/profile_activity" />
     </application>
 
 </manifest>

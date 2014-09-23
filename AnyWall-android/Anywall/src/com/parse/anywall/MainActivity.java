@@ -722,6 +722,13 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         return true;
       }
     });
+
+      menu.findItem(R.id.action_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+          public boolean onMenuItemClick(MenuItem item) {
+              startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+              return true;
+          }
+      });
     return true;
   }
 
