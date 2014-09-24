@@ -1,11 +1,5 @@
 package com.parse.anywall;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -20,14 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -52,8 +43,15 @@ import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
-public class MainActivity extends FragmentActivity implements LocationListener,
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class NewProfileActivity extends FragmentActivity implements LocationListener,
     GooglePlayServicesClient.ConnectionCallbacks,
     GooglePlayServicesClient.OnConnectionFailedListener {
 
@@ -139,7 +137,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     super.onCreate(savedInstanceState);
     radius = Application.getSearchDistance();
     lastRadius = radius;
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_new_profile);
+
+    // Set Activity title
+    setTitle(ParseUser.getCurrentUser().getUsername() + getResources().getString(R.string.possessive_profile));
 
     // Create a new global location parameters object
     locationRequest = LocationRequest.create();
@@ -163,6 +164,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
             Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
             ParseQuery<AnywallPost> query = AnywallPost.getQuery();
             query.include("user");
+            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
             query.orderByDescending("createdAt");
             query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius
                 * METERS_PER_FEET / METERS_PER_KILOMETER);
@@ -230,24 +232,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
       public void onCameraChange(CameraPosition position) {
         // When the camera changes, update the query
         doMapQuery();
-      }
-    });
-
-    // Set up the handler for the post button click
-    Button postButton = (Button) findViewById(R.id.post_button);
-    postButton.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        // Only allow posts if we have a location
-        Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
-        if (myLoc == null) {
-          Toast.makeText(MainActivity.this,
-              "Please try again after your location appears on the map.", Toast.LENGTH_LONG).show();
-          return;
-        }
-
-        Intent intent = new Intent(MainActivity.this, PostActivity.class);
-        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
-        startActivity(intent);
       }
     });
   }
@@ -510,6 +494,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Set up additional query filters
     mapQuery.whereWithinKilometers("location", myPoint, MAX_POST_SEARCH_DISTANCE);
     mapQuery.include("user");
+    mapQuery.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
     mapQuery.orderByDescending("createdAt");
     mapQuery.setLimit(MAX_POST_SEARCH_RESULTS);
     // Kick off the query in the background
@@ -718,17 +703,11 @@ public class MainActivity extends FragmentActivity implements LocationListener,
 
     menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
       public boolean onMenuItemClick(MenuItem item) {
-        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        startActivity(new Intent(NewProfileActivity.this, SettingsActivity.class));
         return true;
       }
     });
 
-      menu.findItem(R.id.action_profile).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-          public boolean onMenuItemClick(MenuItem item) {
-              startActivity(new Intent(MainActivity.this, NewProfileActivity.class));
-              return true;
-          }
-      });
     return true;
   }
 

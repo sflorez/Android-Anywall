@@ -20,6 +20,7 @@
     <string name="settings_distance_format">%d feet</string>
     <string name="activity_post_title">Create a Post</string>
     <string name="character_count_placeholder">0/140</string>
+    <string name="action_bar_default_title">Anywall</string>
 
     <!-- ForgotPasswordActivity -->
     <string name="forgot_password_activity">Reset Your Password</string>
@@ -32,6 +33,7 @@
 
     <!-- ProfileActivity -->
     <string name="profile_activity">Profile</string>
+    <string name="possessive_profile">\'s Profile</string>
 
     <!-- SecurityQuestionActivity -->
     <string name="security_question_activity">Security Question</string>
