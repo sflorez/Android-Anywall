@@ -11,7 +11,7 @@
     tools:context=".ProfileActivity" >
 
     <ListView
-        android:id="@+id/posts_listview"
+        android:id="@+id/posts_profile_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1" />
