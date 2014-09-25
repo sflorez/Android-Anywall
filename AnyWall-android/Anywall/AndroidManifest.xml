@@ -10,7 +10,7 @@
 
     <permission
         android:name="com.parse.anywall.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature"></permission>
+        android:protectionLevel="signature"/>
 
     <uses-permission android:name="com.parse.anywall.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -41,7 +41,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_v2_public_key" />
+            android:value="AIzaSyAgwgN0JM_gSUnjZfCTaYps5ZY0I5E_vXo" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -93,10 +93,6 @@
 
         <activity
             android:name=".ProfileActivity"
-            android:label="@string/profile_activity" />
-
-        <activity
-            android:name=".NewProfileActivity"
             android:label="@string/profile_activity" />
     </application>
 
