@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AnyWall
 
 A fun geolocation app built with Parse.
@@ -16,3 +17,7 @@ See more details here: https://www.parse.com/anywall
 ### Learn More
 
 To learn more, take a look at the [AnyWall Android](https://www.parse.com/tutorials/anywall-android) tutorial.
+=======
+Android-Anywall
+===============
+>>>>>>> 827bb9ca9370126729263bf7afe83f755243018d
